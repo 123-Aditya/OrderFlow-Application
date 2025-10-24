@@ -92,6 +92,12 @@ Postman (for API testing)
 
 ---
 
+## 💡 Event-Driven Architecture
+
+<img width="1310" height="730" alt="Event Driven" src="https://github.com/user-attachments/assets/b6232809-f840-46d0-91ff-87f00cafcf48" />
+
+---
+
 ## 💡 Author
 
 Aditya Upadhyaya
