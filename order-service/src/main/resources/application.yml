@@ -1,7 +1,7 @@
 spring:
   kafka:
     # The address of the Kafka broker that the application will connect to
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: localhost:9092
     
     producer:
       # Serializer class for the key in Kafka messages (converts String to byte data)
@@ -13,6 +13,6 @@ spring:
 
 
 # Custom app-level Kafka configuration
-  app:
-    kafka:
-      topic: orders_topic
+app:
+  kafka:
+    topic: orders_topic
