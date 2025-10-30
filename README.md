@@ -98,6 +98,13 @@ Postman (for API testing)
 
 ---
 
+## 💡 Issues faced and Resolution
+
+OrderService Application not able to connect to Kafka running in Docker and application startup failing with below error:
+<img width="1114" height="630" alt="Screenshot 2025-10-30 at 11 35 17 PM" src="https://github.com/user-attachments/assets/6c23a6e8-2af0-46ff-b928-8d7c69f26306" />
+
+---
+
 ## 💡 Author
 
 Aditya Upadhyaya
