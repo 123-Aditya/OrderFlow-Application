@@ -98,10 +98,20 @@ Postman (for API testing)
 
 ---
 
-## 💡 Issues faced and Resolution
+## 🐞 Issues faced and Resolution
 
 OrderService Application not able to connect to Kafka running in Docker and application startup failing with below error:
 <img width="1114" height="630" alt="Screenshot 2025-10-30 at 11 35 17 PM" src="https://github.com/user-attachments/assets/6c23a6e8-2af0-46ff-b928-8d7c69f26306" />
+
+---
+
+## 📑 Resources Followed
+
+📀 Youtube: https://www.youtube.com/watch?v=YbSC1OsLp20&t=2952s
+
+📄 Documentation: https://kafka.apache.org/documentation/#configuration
+
+💬 ChatGPT
 
 ---
 
@@ -109,4 +119,4 @@ OrderService Application not able to connect to Kafka running in Docker and appl
 
 Aditya Upadhyaya
 
-GitHub: 123-Aditya
+GitHub: [123-Aditya](https://github.com/123-Aditya)
