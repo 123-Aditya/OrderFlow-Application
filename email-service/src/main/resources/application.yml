@@ -1,0 +1,25 @@
+spring:
+  kafka:
+    # The address of the Kafka broker that the application will connect to
+    bootstrap-servers: kafka:9092
+    
+    consumer:
+      # The consumer group ID for the Kafka consumers in this application
+      group-id: email 
+      
+      # When no offset is available, start reading from the earliest message
+      auto-offset-reset: earliest
+      
+      # Deserializer class for the key in Kafka messages (converts byte data to String)
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      
+      # Deserializer class for the value in Kafka messages (converts byte data to String)
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      properties:
+        spring.json.trusted.packages: "*"
+
+# Custom app-level Kafka configuration
+app:
+  kafka:
+    topic: orders_topic
