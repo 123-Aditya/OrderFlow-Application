@@ -18,8 +18,12 @@ spring:
 
       properties:
         spring.json.trusted.packages: "*"
+    
+    config:
+      import: optional:classpath:email-recipients.properties
 
 # Custom app-level Kafka configuration
 app:
   kafka:
-    topic: orders_topic
+    topic: orders_topic 
+
