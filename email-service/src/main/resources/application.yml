@@ -21,6 +21,19 @@ spring:
     
     config:
       import: optional:classpath:email-recipients.properties
+    
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: <your-email@gmail.com>
+      password: <your-app-password>
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+
 
 # Custom app-level Kafka configuration
 app:
