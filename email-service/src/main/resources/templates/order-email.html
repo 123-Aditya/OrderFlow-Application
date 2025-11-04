@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            color: #2a7ae2;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .details {
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="header">New Order Received 🎉</div>
+
+    <div class="details">
+        <p><strong>Order ID:</strong> <span th:text="${orderId}"></span></p>
+        <p><strong>Product:</strong> <span th:text="${productName}"></span></p>
+        <p><strong>Quantity:</strong> <span th:text="${quantity}"></span></p>
+        <p><strong>Price:</strong> ₹<span th:text="${price}"></span></p>
+        <p><strong>Status:</strong> <span th:text="${status}"></span></p>
+    </div>
+
+    <div class="footer">
+        <p>This is an automated email from the Order Service.</p>
+    </div>
+</div>
+</body>
+</html>
