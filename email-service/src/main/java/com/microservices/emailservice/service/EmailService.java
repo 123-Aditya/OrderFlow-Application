@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import org.springframework.scheduling.annotation.Async;
 
 @Service
 public class EmailService {
@@ -19,6 +20,7 @@ public class EmailService {
     @Autowired
     private TemplateEngine templateEngine;
 
+    @Async  // this runs in a separate thread
     public void sendOrderEmailToAll(List<String> recipients, String subject, Map<String, Object> model) {
         for (String email : recipients) {
             sendOrderEmail(email.trim(), subject, model);
