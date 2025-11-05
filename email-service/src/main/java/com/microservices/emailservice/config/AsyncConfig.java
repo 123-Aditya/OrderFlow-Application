@@ -1,10 +1,24 @@
 package com.microservices.emailservice.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
 public class AsyncConfig {
-    // You can optionally define custom thread pool here, but default is fine for now
+
+    @Bean(name = "emailExecutor")
+    public Executor emailExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(3);   // minimum threads
+        executor.setMaxPoolSize(6);    // max threads
+        executor.setQueueCapacity(50); // queued tasks before new threads spawn
+        executor.setThreadNamePrefix("EmailSender-");
+        executor.initialize();
+        return executor;
+    }
 }
