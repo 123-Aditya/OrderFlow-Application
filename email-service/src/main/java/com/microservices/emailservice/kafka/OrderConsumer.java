@@ -37,7 +37,11 @@ public class OrderConsumer {
 
         String subject = "Order Update - ID: " + event.getOrder().getOrderId();
 
-        emailService.sendOrderEmailToAll(emailRecipientsConfig.getEmails(), subject, model);
+        try {
+			emailService.sendOrderEmailToAll(emailRecipientsConfig.getEmails(), subject, model);
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		}
 
         LOG.info("HTML Email sent to all recipients for order {}", event.getOrder().getOrderId());
     }
