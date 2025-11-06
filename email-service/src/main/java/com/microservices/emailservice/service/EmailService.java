@@ -47,12 +47,12 @@ public class EmailService {
         value = { MailException.class, jakarta.mail.MessagingException.class },
         maxAttempts = 3,
         backoff = @Backoff(delay = 2000))
-    public void sendOrderEmailWithRetry(String to, String subject, Map<String, Object> model) throws Exception {
+    public void sendOrderEmailWithRetry(String sendToRecipient, String subject, Map<String, Object> model) throws Exception {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            helper.setTo(to);
+            helper.setTo(sendToRecipient);
             helper.setSubject(subject);
 
             Context context = new Context();
@@ -62,7 +62,7 @@ public class EmailService {
             helper.setText(htmlContent, true);
 
             mailSender.send(message);
-            System.out.println("Email sent successfully to: " + to);
+            LOG.info("Email sent successfully to: ", sendToRecipient);
 
         } catch (MailException | jakarta.mail.MessagingException e) {
             LOG.error("Email sending failed to: ",e.getMessage());
@@ -76,6 +76,5 @@ public class EmailService {
     @Recover
     public void recover(MailException e, String to, String subject, Map<String, Object> model) {
     	LOG.error("Email permanently failed after retries for: ", e.getMessage());
-        // Optional: Save to DB, send alert, or push to a 'failed-email' Kafka topic
     }
 }
