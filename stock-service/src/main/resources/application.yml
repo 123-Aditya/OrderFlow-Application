@@ -19,6 +19,20 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stockdb
+    username: postgres
+    password: your_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
 # Custom app-level Kafka configuration
 app:
   kafka:
