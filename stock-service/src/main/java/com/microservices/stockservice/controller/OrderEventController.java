@@ -1,7 +1,7 @@
 package com.microservices.stockservice.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 import com.microservices.stockservice.entity.OrderEventEntity;
 import com.microservices.stockservice.repository.OrderEventRepository;
@@ -14,8 +14,23 @@ public class OrderEventController {
     private OrderEventRepository orderEventRepository;
 
     @GetMapping
-    public List<OrderEventEntity> getAllOrderEvents() {
-        return orderEventRepository.findAll();
+    public Page<OrderEventEntity> getOrders(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "eventTime") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortDir) {
+
+        Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                                                    : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        if (status != null && !status.isBlank()) {
+            return orderEventRepository.findByStatusIgnoreCase(status, pageable);
+        } else {
+            return orderEventRepository.findAll(pageable);
+        }
     }
 
     @GetMapping("/{id}")
