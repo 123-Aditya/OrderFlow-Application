@@ -11,4 +11,11 @@ public interface OrderEventRepository extends JpaRepository<OrderEventEntity, Lo
 	
     Page<OrderEventEntity> findByStatusIgnoreCase(String status, Pageable pageable);
 
+    Page<OrderEventEntity> findByProductNameContainingIgnoreCaseOrOrderIdContainingIgnoreCase(
+            String productName, String orderId, Pageable pageable);
+
+    Page<OrderEventEntity> findByStatusIgnoreCaseAndProductNameContainingIgnoreCaseOrStatusIgnoreCaseAndOrderIdContainingIgnoreCase(
+            String status1, String productName,
+            String status2, String orderId,
+            Pageable pageable);
 }
