@@ -3,6 +3,7 @@ package com.microservices.stockservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
+
 import com.microservices.stockservice.entity.OrderEventEntity;
 import com.microservices.stockservice.repository.OrderEventRepository;
 
@@ -18,17 +19,32 @@ public class OrderEventController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false) String status,
+            @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "eventTime") String sortBy,
             @RequestParam(defaultValue = "desc") String sortDir) {
 
-        Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
-                                                    : Sort.by(sortBy).descending();
+        Sort sort = sortDir.equalsIgnoreCase("asc")
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        if (status != null && !status.isBlank()) {
+        if (status != null && !status.isBlank() && search != null && !search.isBlank()) {
+            return orderEventRepository
+                    .findByStatusIgnoreCaseAndProductNameContainingIgnoreCaseOrStatusIgnoreCaseAndOrderIdContainingIgnoreCase(
+                            status, search, status, search, pageable);
+        }
+
+        else if (status != null && !status.isBlank()) {
             return orderEventRepository.findByStatusIgnoreCase(status, pageable);
-        } else {
+        }
+
+        else if (search != null && !search.isBlank()) {
+            return orderEventRepository
+                    .findByProductNameContainingIgnoreCaseOrOrderIdContainingIgnoreCase(search, search, pageable);
+        }
+
+        else {
             return orderEventRepository.findAll(pageable);
         }
     }
